@@ -8,37 +8,48 @@ table, th, td {
   border-collapse: collapse;
 }
 </style>
-	
+	<link rel="stylesheet" href="estilos.css">
 	<meta http-equiv="Access-Control-Allow-Origin" content="*">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript" src="scriptb.js"></script>
 </head>
 <body>
 
-	<h1>Hola mundo</h1>
+	<h1><center>Barcos</center></h1>
 
-	<input type="number" id="miId" placeholder="Id">
-	<input type="text" id="name" placeholder="Nombre">
-	<input type="number" id="price" placeholder="Precio">
-	<input type="text" id="description" placeholder="Descripción">
+	<input class="element" type="number" id="ID" placeholder="Id">
+	<input type="text" id="BRAND" placeholder="Marca">
+	<input type="number" id="MODEL" placeholder="Modelo">
+	<input type="number" id="CATEGORY_ID" placeholder="Categoria">
+	<input type="text" id="NAME" placeholder="Nombre">
 
 
-	<button onclick="registro()">ok</button>
+	<button class="boton_1"  onclick="registro(ID)">Registre el barco</button>
 
-	<button onclick="obtenerItems()">VER</button>
+	<button  class="boton_1" onclick="obtenerItems()">ver barcos</button>
 	
-	<button onclick="actualizar()">Editar</button>
+	<button class="boton_1" onclick="actualizar()">Editar</button>
 
-	<div>
+	<center>
 
-		<table>
-			<tbody id="miResultado">
-				
-			</tbody>
-		</table>
+		<div>
+
+			<table>
+				<thead>
+					<tbody id="miResultado">
+						
+						
+					
+
+					
+					
+					</tbody>
+				</thead>
+			</table>
 		
-	</div>
+		</div>
+	</center>
 
 </body>
 </html>
