@@ -9,8 +9,13 @@ function obtenerItems(){
       success:function(response) {
        console.log(response);
        mostrarTabla(response.items);
-        
-      
+       $("#ID").val("");
+       $("#BRAND").val("");
+       $("#MODEL").val("");
+       $("#CATEGORY_ID").val("");
+       $("#NAME").val("");
+       alert('Se muestra la tabla');
+
 
       },
       
@@ -25,21 +30,7 @@ function obtenerItems(){
 function mostrarTabla(items) {
   var misItems=items;
         var tableBody = $("#miResultado");
-        $("#miResultado").append("<colgroup>");
-        $("#miResultado").append("<col>");
-        $("#miResultado").append("<col>");
-        $("#miResultado").append("<col>");
-        $("#miResultado").append("<col>");
-        $("#miResultado").append("<col>");
-        $("#miResultado").append("</colgroup>");
-        $("#miResultado").append("<tr>");
-        $("#miResultado").append("<th>"+"ID"+"</th>");
-        $("#miResultado").append("<th>"+"BRAND"+"</th>");
-        $("#miResultado").append("<th>"+"MODEL"+"</th>");
-        $("#miResultado").append("<th>"+"CATEGORY"+"</th>");
-        $("#miResultado").append("<th>"+"NAME"+"</th>");
-        $("#miResultado").append("</tr>");
-
+        $("#miResultado").empty();
         for(i=0;i<misItems.length;i++){
           $("#miResultado").append("<tr>");
           $("#miResultado").append("<td>"+misItems[i].id+"</td>");
@@ -63,22 +54,28 @@ var elemento={
   model:$("#MODEL").val(),
   category_id:$("#CATEGORY_ID").val(),
   name:$("#NAME").val()
-  }
-
+}
 
 var dataToSend=JSON.stringify(elemento);
 //JSON= JavaScript Object Notation
 $.ajax({
-      dataType: 'json',
+      dataType:'json',
       data:elemento,
-      url:" https://g7af19db8ca09dc-db202109272259.adb.sa-saopaulo-1.oraclecloudapps.com/ords/admin/boat/boat",
+      url:"https://g7af19db8ca09dc-db202109272259.adb.sa-saopaulo-1.oraclecloudapps.com/ords/admin/boat/boat",
       type:'POST',
-      
-      
+
       success:function(response) {
+        /*
         $("#miResultado").empty();
+        $("#ID").val("");
+        $("#BRAND").val("");
+        $("#MODEL").val("");
+        $("#CATEGORY_ID").val("");
+        $("#NAME").val("");
         obtenerItems();
+        */
         alert('Se ha guardado')
+
       },
       
       error: function(jqXHR, textStatus, errorThrown) {
@@ -87,41 +84,6 @@ $.ajax({
   });
 
 }
-
-
-
-
-function borrar(idElemento){
-var elemento={
-  id:idElemento
-};
-
-
-var dataToSend=JSON.stringify(elemento);
-//JSON= JavaScript Object Notation
-$.ajax({
-      dataType:'json',
-      data:dataToSend,
-      url:" https://g7af19db8ca09dc-db202109272259.adb.sa-saopaulo-1.oraclecloudapps.com/ords/admin/boat/boat",
-      type:'DELETE',
-      contentType:'application/json',
-      success:function(response) {
-        $("#miResultado").empty();
-        $("#ID").val("");
-        $("#BRAND").val("");
-        $("#MODEL").val("");
-        $("#CATEGORY_ID").val("");
-        $("#NAME").val("");
-        obtenerItems();
-        alert('Se ha Eliminado');
-      },
-      
-      error: function(jqXHR, textStatus, errorThrown) {
-            
-      }
-  });
-}
-
 
 function obtenerItemEspecifico(idItem){
   $.ajax({
@@ -144,7 +106,7 @@ function obtenerItemEspecifico(idItem){
       },
       
       error: function(jqXHR, textStatus, errorThrown) {
-        alert('ha sucedido un problema no se a podido obtener el item'); 
+        alert('ha sucedido un problema, no se ha podido obtener el item'); 
       }
   });
 
@@ -153,37 +115,67 @@ function obtenerItemEspecifico(idItem){
 function actualizar(){
   var elemento={
     id:$("#ID").val(),
-  brand:$("#BRAND").val(),
-  model:$("#MODEL").val(),
-  category_id:$("#CATEGORY_ID").val(),
-  name:$("#NAME").val()
-    }
+    brand:$("#BRAND").val(),
+    model:$("#MODEL").val(),
+    category_id:$("#CATEGORY_ID").val(),
+    name:$("#NAME").val()
+  }
 
 
 var dataToSend=JSON.stringify(elemento);
 //JSON= JavaScript Object Notation
 $.ajax({
-      dataType: 'json',
-      data:dataToSend,
-      contentType:'application/json',
-      url:" https://g7af19db8ca09dc-db202109272259.adb.sa-saopaulo-1.oraclecloudapps.com/ords/admin/boat/boat",
-      type:'PUT',  
-      success:function(response) {
-        $("#miResultado").empty();
-        $("#ID").val("");
-        $("#BRAND").val("");
-        $("#MODEL").val("");
-        $("#CATEGORY_ID").val("");
-        $("#NAME").val("");
-        obtenerItems();
-        alert('Se ha actualizado');
-      },
+  dataType:'json',
+  data:dataToSend,
+  url:"https://g7af19db8ca09dc-db202109272259.adb.sa-saopaulo-1.oraclecloudapps.com/ords/admin/boat/boat",
+  type:'PUT',
+  contentType:'application/json',
+  success:function(response) {
+    $("#miResultado").empty();
+    $("#ID").val("");
+    $("#BRAND").val("");
+    $("#MODEL").val("");
+    $("#CATEGORY_ID").val("");
+    $("#NAME").val("");
+    obtenerItems();
+    alert('Se ha actualizado');
+
+    },
       
       error: function(jqXHR, textStatus, errorThrown) {
-        alert('ha sucedido un problema no se a podido obtener el item');
+        //alert('ha sucedido un problema, no se ha podido obtener el item');
       }
   });
 
 }
 
-
+function borrar(idElemento){
+  var elemento={
+    id:idElemento
+  };
+  
+  
+  var dataToSend=JSON.stringify(elemento);
+  //JSON= JavaScript Object Notation
+  $.ajax({
+        dataType:'json',
+        data:dataToSend,
+        url:" https://g7af19db8ca09dc-db202109272259.adb.sa-saopaulo-1.oraclecloudapps.com/ords/admin/boat/boat",
+        type:'DELETE',
+        contentType:'application/json',
+        success:function(response) {
+          $("#miResultado").empty();
+          $("#ID").val("");
+          $("#BRAND").val("");
+          $("#MODEL").val("");
+          $("#CATEGORY_ID").val("");
+          $("#NAME").val("");
+          obtenerItems();
+          alert('Se ha Eliminado');
+        },
+        
+        error: function(jqXHR, textStatus, errorThrown) {
+              
+        }
+    });
+  }
