@@ -1,38 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>GRUPO JS</title>
+	<title>CLIENTES</title>
 <style></style>
 	<link rel="stylesheet" href="estilos.css">
 	<meta http-equiv="Access-Control-Allow-Origin" content="*">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-	<script type="text/javascript" src="scriptb.js"></script>
+	<script type="text/javascript" src="scriptclient.js"></script>
 </head>
 <body>
 
 	<center>
-		<h1>Barcos</h1>
+		<h1>Bievenido cliente</h1>
+
 		<div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
-			<input class="feedback-input" type="number" id="ID" placeholder="Id" required>
-			
+			<input class="feedback-input" type="number" id="id" placeholder="Id" required>
 		</div>
 		<!--BRAND-->
 		<div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
-			<input type="text" id="BRAND" class="feedback-input" placeholder="Marca">
+			<input type="text" class="feedback-input" id="NAME" placeholder="Nombre">
 		</div>
 		<!--MODEL-->
 		<div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
-			<input type="number" id="MODEL" class="feedback-input"placeholder="Modelo">
+			<input type="email" class="feedback-input" id="EMAIL" placeholder="Email">
 		</div>
 
-		<!--CATEGORY-->
+		<!--MODEL-->
 		<div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
-			<input type="number" id="CATEGORY_ID" class="feedback-input" placeholder="Categoria">
-		</div>
-		<!--NAME-->
-		<div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
-			<input type="text" id="NAME" class="feedback-input" placeholder="Nombre">
+			<input type="number" class="feedback-input" id="AGE" placeholder="Fecha">
 		</div>
 	
 	
@@ -41,11 +37,11 @@
 	
 
 
-		<button class="boton_1"  onclick="registro()">Registre el barco</button>
+		<button class="boton_1"  onclick="registro()">Registrar cliente</button>
 
-		<button  class="boton_1" onclick="obtenerItems()">ver barcos</button>
+		<button  class="boton_1" onclick="obtenerItems()">Ver clientes</button>
 		
-		<button class="boton_1" onclick="actualizar()">Editar</button>
+		<button class="boton_1" onclick="actualizar()">Editar clientes</button>
 	</center>
 	
 	<section>
