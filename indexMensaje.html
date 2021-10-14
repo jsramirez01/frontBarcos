@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>MENSAJE</title>
+    <style></style>
+	<link rel="stylesheet" href="estilos.css">
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<script type="text/javascript" src="scriptMensaje.js"></script>
+</head>
+<body>
+
+	<center>
+		<h1>Menu de mensajes</h1>
+		<div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+			<input  type="number" class="feedback-input" id="ID" placeholder="Id" required>
+			
+		</div>
+		<!--BRAND-->
+		<div>
+			<input type="text" class="feedback-input" id="MESSAGETEXT" placeholder="Mensaje">
+		</div>
+
+		<button class="boton_1"  onclick="registro()">Ingresar Mensaje</button>
+
+		<button  class="boton_1" onclick="obtenerItems()">Ver Mensaje</button>
+		
+		<button class="boton_1" onclick="actualizar()">Editar Mensaje</button>
+	</center>
+	
+	<section>
+		<div class="tbl-header">
+			<table>
+				<thead id=Mi>
+
+				</thead>
+			</table>
+		</div>
+		<div class="tbl-content">
+			<table>
+				<tbody id="miResultado" >
+				</tbody>
+			</table>
+		</div>	
+			
+	</section>	
+	
+
+</body>
+</html>

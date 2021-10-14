@@ -29,22 +29,33 @@ function obtenerItems(){
 }
 function mostrarTabla(items) {
   var misItems=items;
-        var tableBody = $("#miResultado");
-        $("#miResultado").empty();
-        for(i=0;i<misItems.length;i++){
-          $("#miResultado").append("<tr>");
-          $("#miResultado").append("<td>"+misItems[i].id+"</td>");
-          $("#miResultado").append("<td>"+misItems[i].brand+"</td>");
-          $("#miResultado").append("<td>"+misItems[i].model+"</td>");
-          $("#miResultado").append("<td>"+misItems[i].category_id+"</td>");
-          $("#miResultado").append("<td>"+misItems[i].name+"</td>");
-          $("#miResultado").append('<td><button onclick="borrar('+misItems[i].id+')">Borrar</button></td>');
-          $("#miResultado").append('<td><button onclick="obtenerItemEspecifico('+misItems[i].id+')">Cargar</button></td>');
-          $("#miResultado").append("</tr>");
+  var tableBody = $("#miResultado"); 
+  var tableMI = $("#Mi"); 
+  $("#Mi").empty();
+  $("#miResultado").empty();
+  $("#Mi").append("<tr>");     
+  $("#Mi").append("<th>ID</th>");
+  $("#Mi").append("<th>BRAND</th>");
+  $("#Mi").append("<th>MODEL</th>");
+  $("#Mi").append("<th>CATEGORY_ID</th>");
+  $("#Mi").append("<th>NAME</th>");
+  $("#Mi").append("<th>BORRAR</th>");
+  $("#Mi").append("<th>CARGAR</th>");
+  $("#Mi").append("</tr>");
+  for(i=0;i<misItems.length;i++){ 
+    $("#miResultado").append("<tr>");
+    $("#miResultado").append("<td>"+misItems[i].id+"</td>");
+    $("#miResultado").append("<td>"+misItems[i].brand+"</td>");
+    $("#miResultado").append("<td>"+misItems[i].model+"</td>");
+    $("#miResultado").append("<td>"+misItems[i].category_id+"</td>");
+    $("#miResultado").append("<td>"+misItems[i].name+"</td>");
+    $("#miResultado").append('<td><button class="boton_1" onclick="borrar('+misItems[i].id+')">Borrar</button></td>');
+    $("#miResultado").append('<td><button class="boton_1" onclick="obtenerItemEspecifico('+misItems[i].id+')">Cargar</button></td>');
+    $("#miResultado").append("</tr>");
 
-        }
-        //var filaTabla = '<tr><td>' + misItems[i].id + '</td><td>' + misItems[i].brand + '</td><td>' + misItems[i].model + '</td><td>' + misItems[i].category_id + '</td><td>' + misItems[i].name + '</td></tr>';
-        //tableBody.append(filaTabla);
+  }
+  //var filaTabla = '<tr><td>' + misItems[i].id + '</td><td>' + misItems[i].brand + '</td><td>' + misItems[i].model + '</td><td>' + misItems[i].category_id + '</td><td>' + misItems[i].name + '</td></tr>';
+  //tableBody.append(filaTabla);
   
 }
 function registro(){
@@ -65,7 +76,8 @@ $.ajax({
       type:'POST',
 
       success:function(response) {
-        /*
+        console.log(response);
+        mostrarTabla(response.items);
         $("#miResultado").empty();
         $("#ID").val("");
         $("#BRAND").val("");
@@ -73,27 +85,27 @@ $.ajax({
         $("#CATEGORY_ID").val("");
         $("#NAME").val("");
         obtenerItems();
-        */
-        alert('Se ha guardado')
+        alert('Se ha guardado');
 
       },
       
       error: function(jqXHR, textStatus, errorThrown) {
-          alert("No se pudo guardar")  
+        alert("No se pudo guardar")  
       }
   });
 
 }
 
 function obtenerItemEspecifico(idItem){
+
   $.ajax({
       dataType: 'json',
       url:" https://g7af19db8ca09dc-db202109272259.adb.sa-saopaulo-1.oraclecloudapps.com/ords/admin/boat/boat",
       type:'GET',
       contenty:'aplication/json',
-      success:function(response) {
+      success: function(response) {
         console.log(response);
-        var item=response.items[0];
+        var item=response.items[idItem];
 
         $("#ID").val(item.id);
         $("#BRAND").val(item.brand);
@@ -113,6 +125,7 @@ function obtenerItemEspecifico(idItem){
 }
 
 function actualizar(){
+  
   var elemento={
     id:$("#ID").val(),
     brand:$("#BRAND").val(),
@@ -120,6 +133,8 @@ function actualizar(){
     category_id:$("#CATEGORY_ID").val(),
     name:$("#NAME").val()
   }
+  
+ 
 
 
 var dataToSend=JSON.stringify(elemento);
@@ -131,6 +146,7 @@ $.ajax({
   type:'PUT',
   contentType:'application/json',
   success:function(response) {
+    console.log(response);
     $("#miResultado").empty();
     $("#ID").val("");
     $("#BRAND").val("");
@@ -143,10 +159,10 @@ $.ajax({
     },
       
       error: function(jqXHR, textStatus, errorThrown) {
-        //alert('ha sucedido un problema, no se ha podido obtener el item');
+        alert('ha sucedido un problema, no se ha podido obtener el item');
       }
   });
-
+  
 }
 
 function borrar(idElemento){
