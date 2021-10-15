@@ -105,7 +105,7 @@ function obtenerItemEspecifico(idItem){
       contenty:'aplication/json',
       success: function(response) {
         console.log(response);
-        var item=response.items[idItem];
+        var item=response.items[1];
 
         $("#ID").val(item.id);
         $("#BRAND").val(item.brand);
